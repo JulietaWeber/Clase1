@@ -1,6 +1,7 @@
 import {config} from './dbconfig.js'
 import express from "express";
 import 'dotenv/config'
+import bcrypt from 'bcrypt';
 
 import pkg from 'pg'
 const {Client} = pkg;
@@ -8,7 +9,7 @@ const {Client} = pkg;
 const app = express()
 const PORT = 8000
 
-
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.send('Hello World')
