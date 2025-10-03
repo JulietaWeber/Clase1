@@ -1,14 +1,11 @@
-import { Router } from "express";
-import { crearUsuario, login, setRol } from "../controllers/user.controller.js";
-import { verifyToken, verifyAdmin } from "../middlewares/auth.js";
+import { Router } from 'express'
+import { crearUsuario, login, setRol } from '../controllers/user.controller.js'
+import { verifyToken, verifyAdmin } from '../middlewares/auth.js'
 
-const router = Router();
+const router = Router()
 
-router.post("/user/crearUsuario", crearUsuario);
-router.post("/user/login", login);
-router.post("/user/setRol", verifyToken, verifyAdmin, setRol);
+router.post('/crearUsuario', crearUsuario)
+router.post('/login', login)
+router.post('/setRol', verifyToken, verifyAdmin, setRol)
 
-export default router;
-
-
-
+export default router

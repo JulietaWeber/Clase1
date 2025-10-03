@@ -1,25 +1,18 @@
+import pg from 'pg'
+const { Pool } = pg
 
-import pkg from "pg";
-import dotenv from "dotenv";
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+})
 
-dotenv.config();
-const { Client } = pkg;
-
-export async function executeQuery(query, params = []) {
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false } // necesario para Neon
-  });
-
+export async function executeQuery(text, params) {
+  const client = await pool.connect()
   try {
-    await client.connect();
-    const result = await client.query(query, params);
-    return result;
-  } catch (error) {
-    console.error("Error en executeQuery:", error);
-    throw error;
+    const res = await client.query(text, params)
+    return res
   } finally {
-    await client.end();
+    client.release()
   }
 }
 
