@@ -26,20 +26,4 @@ export async function registrarEscucha(req, res) {
   }
 }
 
-export async function obtenerEscuchas(req, res) {
-  const { id: usuarioId } = req.user
-  try {
-    const r = await executeQuery(
-      `SELECT c.id, c.nombre, e.reproducciones
-       FROM escucha e
-       JOIN cancion c ON e.cancionid = c.id
-       WHERE e.usuarioid = $1
-       ORDER BY e.reproducciones DESC, c.nombre ASC`,
-      [usuarioId]
-    )
-    res.json(r.rows)
-  } catch (error) {
-    console.error('Error al obtener escuchas:', error)
-    res.status(500).json({ message: 'Error al obtener escuchas' })
-  }
-}
+
