@@ -1,32 +1,35 @@
+// index.js
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 
-import userRouter from './routes/user.router.js'
-import cancionRouter from './routes/cancion.router.js'
-import escuchaRouter from './routes/escucha.router.js'
+// 👇 OJO: carpeta correcta es "routers" (plural)
+import userRouter from './routers/user.router.js'
+import cancionRouter from './routers/cancion.router.js'
+import escuchaRouter from './routers/escucha.router.js'
+
+import { crearUsuario, login } from './controllers/user.controller.js'
+import { verifyToken } from './middlewares/auth.js'
+import { obtenerEscuchas } from './controllers/escucha.controller.js'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Rutas "formales" con prefijo
-app.use('/api/user', userRouter)
-app.use('/api/cancion', cancionRouter)
-app.use('/api', escuchaRouter) // contiene /escucho GET y POST
+// Prefijos "formales"
+app.use('/api/user', userRouter)        // /api/user/crearUsuario | /login | /setRol
+app.use('/api/cancion', cancionRouter)  // /api/cancion (POST/PUT/DELETE)
+app.use('/api', escuchaRouter)          // /api/escucho (GET/POST)
 
-// Aliases literales para cumplir la consigna
-import { crearUsuario, login } from './controllers/user.controller.js'
-import { verifyToken } from './middlewares/auth.js'
-import { obtenerEscuchas } from './controllers/escucha.controller.js'
-
+// Alias básicos de consigna
 app.post('/crearusuario', crearUsuario)
 app.post('/login', login)
 app.get('/escucho', verifyToken, obtenerEscuchas)
 
-// Salud
-app.get('/', (req, res) => {
-  res.json({ ok: true, msg: 'API TP Auth & Escuchas' })
-})
+app.get('/', (_req, res) => res.json({ ok: true, msg: 'API TP Auth & Escuchas' }))
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
 
 export default app
+

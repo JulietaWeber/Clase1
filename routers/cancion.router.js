@@ -1,12 +1,12 @@
+import { Router } from 'express'
+import { crearCancion, actualizarCancion, borrarCancion } from '../controllers/cancion.controller.js'
+import { verifyToken, verifyAdmin } from '../middlewares/auth.js'
 
-import { Router } from "express";
-import { crearCancion, actualizarCancion, eliminarCancion } from "../controllers/cancion.controller.js";
-import { verifyToken, verifyAdmin } from "../middlewares/auth.js";
+const router = Router()
 
-const router = Router();
+// Quedan: POST/PUT/DELETE /api/cancion
+router.post('/', verifyToken, verifyAdmin, crearCancion)
+router.put('/', verifyToken, verifyAdmin, actualizarCancion)
+router.delete('/', verifyToken, verifyAdmin, borrarCancion)
 
-router.post("/cancion", verifyToken, verifyAdmin, crearCancion);
-router.put("/cancion", verifyToken, verifyAdmin, actualizarCancion);
-router.delete("/cancion", verifyToken, verifyAdmin, eliminarCancion);
-
-export default router;
+export default router
