@@ -1,6 +1,5 @@
 import { executeQuery } from '../services/db.js'
 
-// POST /api/cancion  (Admin)
 export async function crearCancion(req, res) {
   const { nombre } = req.body
   if (!nombre) return res.status(400).json({ message: 'Falta nombre' })
@@ -13,7 +12,6 @@ export async function crearCancion(req, res) {
   }
 }
 
-// PUT /api/cancion  (Admin)
 export async function actualizarCancion(req, res) {
   const { id, nombre } = req.body
   if (!id || !nombre) return res.status(400).json({ message: 'Faltan datos' })
@@ -27,7 +25,6 @@ export async function actualizarCancion(req, res) {
   }
 }
 
-// DELETE /api/cancion  (Admin)
 export async function borrarCancion(req, res) {
   const { id } = req.body
   if (!id) return res.status(400).json({ message: 'Falta id' })

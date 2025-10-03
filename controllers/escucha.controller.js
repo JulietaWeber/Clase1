@@ -1,6 +1,5 @@
 import { executeQuery } from '../services/db.js'
 
-// POST /api/escucho  Body: { idCancion }  (Usuario logueado)
 export async function registrarEscucha(req, res) {
   const { idCancion } = req.body
   const { id: usuarioId } = req.user
@@ -27,7 +26,6 @@ export async function registrarEscucha(req, res) {
   }
 }
 
-// GET /escucho  (Usuario logueado)
 export async function obtenerEscuchas(req, res) {
   const { id: usuarioId } = req.user
   try {

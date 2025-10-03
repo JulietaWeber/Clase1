@@ -4,7 +4,6 @@ import { registrarEscucha, obtenerEscuchas } from '../controllers/escucha.contro
 
 const router = Router()
 
-// Quedan: POST/GET /api/escucho
 router.post('/escucho', verifyToken, registrarEscucha)
 router.get('/escucho', verifyToken, obtenerEscuchas)
 
