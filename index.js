@@ -1,9 +1,7 @@
-// index.js
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 
-// 👇 OJO: carpeta correcta es "routers" (plural)
 import userRouter from './routers/user.router.js'
 import cancionRouter from './routers/cancion.router.js'
 import escuchaRouter from './routers/escucha.router.js'
@@ -16,10 +14,10 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// Prefijos "formales"
-app.use('/api/user', userRouter)        // /api/user/crearUsuario | /login | /setRol
-app.use('/api/cancion', cancionRouter)  // /api/cancion (POST/PUT/DELETE)
-app.use('/api', escuchaRouter)          // /api/escucho (GET/POST)
+
+app.use('/api/user', userRouter)      
+app.use('/api/cancion', cancionRouter)  
+app.use('/api', escuchaRouter)          
 
 // Alias básicos de consigna
 app.post('/crearusuario', crearUsuario)

@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { executeQuery } from '../services/db.js'
 
-// POST /crearusuario
-// Body: { idUsuario, nombre, password }
 export async function crearUsuario(req, res) {
   const { idUsuario, nombre, password } = req.body
   if (!idUsuario || !nombre || !password) {
@@ -26,8 +24,6 @@ export async function crearUsuario(req, res) {
   }
 }
 
-// POST /login
-// Body: { idUsuario, password }
 export async function login(req, res) {
   const { idUsuario, password } = req.body
   if (!idUsuario || !password) {
@@ -52,8 +48,6 @@ export async function login(req, res) {
   }
 }
 
-// POST /api/user/setRol  (Admin)
-// Body: { idUsuario, rol }  // 'Admin' | 'Usuario'
 export async function setRol(req, res) {
   const { idUsuario, rol } = req.body
   if (!idUsuario || !rol || !['Admin', 'Usuario'].includes(rol)) {
