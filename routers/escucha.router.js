@@ -5,6 +5,7 @@ import { registrarEscucha, obtenerEscuchas } from '../controllers/escucha.contro
 const router = Router()
 
 router.post('/escucho', verifyToken, registrarEscucha)
+router.get('/escucho', verifyToken, obtenerEscuchas)
 
 
 export default router
